@@ -36,7 +36,7 @@ object galvan {
                 deuda = deuda - sueldoFijo
         }
             else {
-                dinero =+ (sueldoFijo - deuda)
+                dinero += (sueldoFijo - deuda)
                 deuda = 0 
             }
     }
@@ -52,9 +52,7 @@ object baigorria {
 
     method totalCobrado() = totalCobrado
     method cobrarSueldo() {
-        totalCobrado =+ self.sueldo()
+        totalCobrado += self.sueldo()
+        empanadasVendidas = 0
     } 
-    method yaCobro() {
-        // no se, quiero un booleano pero no se a que comprarlo
-    }
 }
