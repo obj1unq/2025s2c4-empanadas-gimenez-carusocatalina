@@ -19,10 +19,11 @@ object galvan {
     }
     
     method sueldo() = sueldoFijo
-    method deuda() = deuda 
+    method deuda() = deuda // una sola variable es suficiente
     method dinero() = dinero
 
     method gastar(cuanto) {
+        dinero -= cuanto //esta linea seria suficiente
         if (cuanto >= dinero) {
             deuda = deuda + (cuanto - dinero)
             dinero = 0
@@ -32,6 +33,7 @@ object galvan {
             }
     }
     method cobrarSueldo() {
+        dinero += sueldoFijo // esta linea seria suficiente
         if (deuda >= self.sueldo()) { 
                 deuda = deuda - sueldoFijo
         }
