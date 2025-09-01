@@ -11,7 +11,6 @@ object gimenez {
 
 object galvan {
     var dinero = 0
-    var deuda = 0
     var sueldoFijo = 15000
     
     method sueldo(valorDeCambio) {
@@ -19,38 +18,40 @@ object galvan {
     }
     
     method sueldo() = sueldoFijo
-    method deuda() = deuda // una sola variable es suficiente
-    method dinero() = dinero
+
+    method deuda() {
+        return if (self.saldo() < 0) {
+            self.saldo()*(-1)
+        }
+            else { 0 }
+    }
+
+    method saldo() = dinero
+    
+    method dinero() {
+        return if (self.saldo()>0){
+            self.saldo()
+        }
+            else { 0 }
+    }
 
     method gastar(cuanto) {
-        dinero -= cuanto //esta linea seria suficiente
-        if (cuanto >= dinero) {
-            deuda = deuda + (cuanto - dinero)
-            dinero = 0
-        }
-            else {
-              dinero = dinero - cuanto
-            }
+        dinero -= cuanto 
     }
     method cobrarSueldo() {
-        dinero += sueldoFijo // esta linea seria suficiente
-        if (deuda >= self.sueldo()) { 
-                deuda = deuda - sueldoFijo
-        }
-            else {
-                dinero += (sueldoFijo - deuda)
-                deuda = 0 
-            }
+        dinero += self.sueldo() 
     }
 }
 object baigorria {
     var totalCobrado = 0
     var empanadasVendidas = 0
+    var property gananciaEmpanada = 15
+
     method vender(cantidad) {
         empanadasVendidas = empanadasVendidas + cantidad
     } 
     method empanadasVendidas() = empanadasVendidas
-    method sueldo() = empanadasVendidas*15
+    method sueldo() = empanadasVendidas*self.gananciaEmpanada()
 
     method totalCobrado() = totalCobrado
     method cobrarSueldo() {
